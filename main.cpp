@@ -1,45 +1,81 @@
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+class Keyboard
+{
+private:
+    sf::RenderWindow keyboardWindow;
+
+public:
+    Keyboard() : keyboardWindow(sf::VideoMode(800,600),"Keyboard Window") {
+        keyboardWindow.setFramerateLimit(60);
+    }
+
+    void keyboardEvent()
+    {
+        sf::Event event;// event object holds information about an event(key
+
+        while(keyboardWindow.pollEvent(event))
+        {
+
+            if (event.type == sf::Event::Closed)
+            {
+                keyboardWindow.close();
+            }
+            if (event.key.code == sf::Keyboard::Escape) {
+                keyboardWindow.close();
+            }
+        }
+    }
+
+    void keyboardLogic()
+    {
+        sf::Event keyboardEvent;// event object holds information about an event(key
+
+        while(keyboardWindow.pollEvent(keyboardEvent))
+        {
+            if(keyboardEvent.type == sf::Event::KeyPressed) {//checks if key is pressed(so it only checks once a button has been pressed)
+                if (keyboardEvent.key.code == sf::Keyboard::A) {
+
+                }
+            }
+        }
+    }
+    void renderWindow()
+    {
+        keyboardWindow.clear();
+
+        //draw stuff here
+
+        keyboardWindow.display();
+    }
+
+    //main method to initiate, includes logic update and window update
+    void runKeyboard()
+    {
+        while(keyboardWindow.isOpen())
+        {
+            keyboardEvent(); //handles events (keys, mouse)
+            keyboardLogic();
+            renderWindow(); //clear window and display everything
+
+        }
+    }
+};
+
 
 int main()
 {
-    // Create a window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Circle Example");
+    Keyboard keyboardObj, *keyboardPtr = &keyboardObj;
 
-    // Create a circle shape
-    sf::CircleShape circle(100.f); // Radius of 100
-    circle.setFillColor(sf::Color::Green); // Set the color to green
-    circle.setPosition(350, 250); // Set the position of the circle in the window
-
-    // Main loop
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed) {
-                window.close(); // Close the window when the close event is triggered
-            }
-            // Handle mouse move event
-            if (event.type == sf::Event::MouseMoved) {
-                // Get the mouse position
-                int mouseX = event.mouseMove.x;
-                int mouseY = event.mouseMove.y;
-
-                // Output the mouse position to the console
-                std::cout << "Mouse moved to: (" << mouseX << ", " << mouseY << ")\n";
-            }
-        }
-
-        // Clear the window
-        window.clear(sf::Color::Black);
-
-        // Draw the circle
-        window.draw(circle);
-
-        // Display the contents of the window
-        window.display();
-
-    }
-    return 0;
+    keyboardPtr->runKeyboard();
 }
+
+
+
+
+// SFML has internal events, which are stored somewhere. The object we created stores the events that come from the pollEvent function,
+// which continuously checks for events in order. Now, the object of type sf::Event contains data that we can compare to our existing items,
+// such as Close, Escape, or KeyboardPressed

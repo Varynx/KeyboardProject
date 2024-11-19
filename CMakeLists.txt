@@ -11,6 +11,7 @@ find_package(OpenGL REQUIRED)
 #[[find_package(GLU REQUIRED)]]
 target_link_libraries(KeyboardProject PRIVATE #[[sfml-system sfml-network]] sfml-audio sfml-graphics sfml-window OpenGL::GL
                         #[[GLU::GLU]])
+
 set(CMAKE_PREFIX_PATH Im-Gui-SFML "C:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/share/imgui")
 find_package(ImGui-SFML CONFIG REQUIRED)
 target_link_libraries(KeyboardProject PRIVATE ImGui-SFML::ImGui-SFML)

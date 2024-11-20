@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <array>
 
 class Keyboard {
     sf::RenderWindow keyboardWindow;
@@ -13,6 +14,9 @@ class Keyboard {
     sf::SoundBuffer buffer1;
     sf::Sound sound1;
 
+    std::array<sf::RectangleShape,61> keyboardNotes;
+    sf::Texture whiteKeyTexture;
+    sf::Texture blackKeyTexture;
 
 public:
     // Constructor

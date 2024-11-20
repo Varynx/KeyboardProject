@@ -5,13 +5,18 @@
 #include <SFML/Audio.hpp>
 
 class Keyboard {
-private:
     sf::RenderWindow keyboardWindow;
+    // sf::SoundBuffer pianoNotes[61];
+    // sf::Sound pianoNote[61];
     sf::SoundBuffer buffer;
     sf::Sound sound;
+    sf::SoundBuffer buffer1;
+    sf::Sound sound1;
+
 
 public:
     // Constructor
+
     Keyboard();
 
     // Events

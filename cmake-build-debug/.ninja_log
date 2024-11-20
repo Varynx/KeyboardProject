@@ -1,8 +1,9 @@
 # ninja log v6
-1124	1335	7537639290757111	KeyboardProject.exe	e345680e9a4abb3c
-43	1865	7537648750011549	build.ninja	3d36c66a2fffd369
-7	1123	7537639279600227	CMakeFiles/KeyboardProject.dir/main.cpp.obj	b0ab7f25056ad14b
+1495	1749	7538309194068486	KeyboardProject.exe	6c53cc310eda9eee
+43	1865	7538317848471379	build.ninja	3d36c66a2fffd369
+83	1977	7538317603623453	CMakeFiles/KeyboardProject.dir/keyboard.cpp.obj	73a42ccd3e610170
+67	2308	7538317603455045	CMakeFiles/KeyboardProject.dir/main.cpp.obj	b0ab7f25056ad14b
 67	92	7529958980665013	clean	d71689d2ca1ee7ce
-17	758	7537651436143676	CMakeFiles/KeyboardProject.dir/keyboard.cpp.obj	73a42ccd3e610170
-11	963	7537651436077772	CMakeFiles/KeyboardProject.dir/main.cpp.obj	b0ab7f25056ad14b
-963	1185	7537651445607013	KeyboardProject.exe	6c53cc310eda9eee
+28	1549	7538318088612471	CMakeFiles/KeyboardProject.dir/keyboard.cpp.obj	73a42ccd3e610170
+16	1967	7538318088497863	CMakeFiles/KeyboardProject.dir/main.cpp.obj	b0ab7f25056ad14b
+1967	2534	7538318108005637	KeyboardProject.exe	6c53cc310eda9eee

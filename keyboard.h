@@ -6,13 +6,8 @@
 
 class Keyboard {
     sf::RenderWindow keyboardWindow;
-    // sf::SoundBuffer pianoNotes[61];
-    // sf::Sound pianoNote[61];
-    sf::SoundBuffer buffer;
-    sf::Sound sound;
-    sf::SoundBuffer buffer1;
-    sf::Sound sound1;
-
+    sf::SoundBuffer pianoBuffer[7];
+    sf::Sound pianoSound[7];
 
 public:
     // Constructor

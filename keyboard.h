@@ -22,6 +22,9 @@ public:
     // Events
     void keyboardEvent();
 
+    // Draws each piano note
+    void drawKeyboard();
+
     // Draw
     void renderWindow();
 

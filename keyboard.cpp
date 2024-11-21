@@ -12,13 +12,14 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(800, 600), "Keyboard Window"
         pianoBuffer[pianoIter].loadFromFile(name);
         pianoSound[pianoIter].setBuffer(pianoBuffer[pianoIter]);
     }
+
     //loads jpg image from computer (change filepath as needed)
-    backgroundTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/randomMinimalistBackground.jpg");
+    backgroundTexture.loadFromFile("../assets/beigeBackground.jpg");
     backgroundImage.setTexture(&backgroundTexture);
     backgroundImage.setSize(sf::Vector2f(2400,1600));
     //loads in gradient for white and black key textures (change filepath as needed)
-    whiteKeyTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/beigeToWhite.jpg");
-    blackKeyTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/blackGradientTransparent.jpg");
+    whiteKeyTexture.loadFromFile("../assets/beigeToWhite.jpg");
+    // blackKeyTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/blackGradientTransparent.jpg");
     //WHITE KEYS INITIALIZED BELOW
     float xPositionWhiteKeys = 0;
     float yPositionWhiteKeys = 700;
@@ -111,9 +112,6 @@ void Keyboard::keyboardEvent() {//test for events
         }
     }
 }
-void Keyboard::keyboardLogic() {
-    //
-}
 
 void Keyboard::renderWindow() {
     keyboardWindow.clear();
@@ -126,7 +124,9 @@ void Keyboard::renderWindow() {
 void Keyboard::runKeyboard() {
     while (keyboardWindow.isOpen()) {
         keyboardEvent();  // Handles events (keyboard, mouse)
-        keyboardLogic();  //
         renderWindow();   // clear and draw
     }
 }
+// SFML has internal events, which are stored somewhere. The object named events we created stores the events that come from the pollEvent function,
+// which continuously checks for events in order. Now, the object events of type sf::Event contains data that we can compare to our existing items,
+// such as Close, Escape, or KeyboardPressed

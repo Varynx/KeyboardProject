@@ -22,9 +22,6 @@ public:
     // Events
     void keyboardEvent();
 
-    //
-    void keyboardLogic();
-
     // Draw
     void renderWindow();
 

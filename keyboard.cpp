@@ -113,6 +113,15 @@ void Keyboard::keyboardEvent() {//test for events
     }
 }
 
+void Keyboard::drawKeyboard()
+{
+    keyboardWindow.draw(backgroundImage);
+    for(int iterate = 0; iterate < 61; iterate++)
+    {
+        keyboardWindow.draw(keyboardNotes[iterate]);
+    }
+}
+
 void Keyboard::renderWindow() {
     keyboardWindow.clear();
 

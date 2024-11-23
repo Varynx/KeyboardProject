@@ -8,22 +8,15 @@
 class Keyboard {
 private:
     sf::RenderWindow keyboardWindow;
-
-    int sizeOfPiano = 61;
-    std::array<sf::SoundBuffer,61> pianoBuffer;
-    std::array<sf::Sound,61> pianoSound;
+    sf::SoundBuffer pianoBuffer[61];
+    sf::Sound pianoSound[61];
 
     sf::RectangleShape backgroundImage;
     sf::Texture backgroundTexture;
 
     std::array<sf::RectangleShape,61> keyboardNotes;
-    std::array<sf::Text, 61> keyboardCharacters;
-
-    sf::Font pianoIndexFont;
     sf::Texture whiteKeyTexture;
-    sf::Texture whiteKeyTextureDark;
     sf::Texture blackKeyTexture;
-    sf::Texture blackKeyTextureLight;
 public:
     // Constructor
     Keyboard();
@@ -33,8 +26,6 @@ public:
 
     // Draws each piano note
     void drawKeyboard();
-
-    int charDetectASCII(int);
 
     // Draws each piano note
     void runKeyboard();

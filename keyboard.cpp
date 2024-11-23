@@ -114,6 +114,40 @@ void Keyboard::keyboardEvent() {//test for events
     }
 }
 
+int Keyboard::charDetectASCII(int unicodeDetect)
+{
+    std::unordered_map<int, int> unicodeIndexMap =
+            {
+                    //WHITE KEYS ASCII TO PIANO INDEX
+                    //0-9 nums
+                    {48,9},{49,0}, {50,1}, {51,2},{52,3},{53,4},{54,5},{55,6},{56,7},{57,8},
+                    //lower q-p char
+                    {113,10},{119,11},{101,12},{114,13},{116,14},{121,15},{117,16},{105,17},{111,18},{112,19},
+                    //lower a-l char
+                    {97,20},{115,21},{100,22},{102,23},{103,24},{104,25},{106,26},{107,27},{108,28},
+                    //lower z-m char
+                    {122,29},{120,30},{99,31},{118,32},{98,33},{110,34},{109,35},
+
+                    //BLACK KEYS ASCII TO PIANO INDEX
+                    // @# %^& ()
+                    {64,36},{35,37},{37,38},{94,39},{38,40},{40,41},{41,42},
+                    // QWE TY IOP
+                    {81,43},{87,44},{69,45},{84,46},{89,47},{73,48},{79,49},{80,50},
+                    // SD GHJ LZ
+                    {83,51},{68,52},{71,53},{72,54},{74,55},{76,56},{90,57},
+                    //CVB
+                    {67,58},{86,59},{66,60}
+            };
+
+    //general template for detection
+    if(unicodeIndexMap.find(unicodeDetect) != unicodeIndexMap.end())
+    {
+        return unicodeIndexMap[unicodeDetect];
+    }
+    else
+        return -1;
+}
+
 void Keyboard::drawKeyboard() {
     keyboardWindow.draw(backgroundImage);
     for(int iterate = 0; iterate < 61; iterate++)

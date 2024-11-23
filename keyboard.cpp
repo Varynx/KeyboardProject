@@ -4,7 +4,7 @@
 #include <fstream>
 
 // Constructor definition
-Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(800, 600), "Keyboard Window") {
+Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
     for(int pianoIter=0; pianoIter<7; pianoIter++) {
         std::string name = "../assets/sounds/a" + std::to_string(pianoIter+1) + ".mp3";
@@ -14,12 +14,13 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(800, 600), "Keyboard Window"
     }
 
     //loads jpg image from computer (change filepath as needed)
-    backgroundTexture.loadFromFile("../assets/beigeBackground.jpg");
+    backgroundTexture.loadFromFile("../assets/textures/beigeBackground.jpg");
     backgroundImage.setTexture(&backgroundTexture);
-    backgroundImage.setSize(sf::Vector2f(2400,1600));
+    backgroundImage.setSize(sf::Vector2f(1920,1200));
     //loads in gradient for white and black key textures (change filepath as needed)
-    whiteKeyTexture.loadFromFile("../assets/beigeToWhite.jpg");
-    // blackKeyTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/blackGradientTransparent.jpg");
+    whiteKeyTexture.loadFromFile("../assets/textures/beigeToWhite.jpg");
+
+    // blackKeyTexture.loadFromFile(" ");
     //WHITE KEYS INITIALIZED BELOW
     float xPositionWhiteKeys = 0;
     float yPositionWhiteKeys = 700;
@@ -27,7 +28,7 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(800, 600), "Keyboard Window"
     {
         keyboardNotes[iter].setPosition(xPositionWhiteKeys,yPositionWhiteKeys);
         keyboardNotes[iter].setSize(sf::Vector2f(66.6,400));
-        keyboardNotes[iter].setFillColor(sf::Color::White);
+        // keyboardNotes[iter].setFillColor(sf::Color::White);
         keyboardNotes[iter].setOutlineThickness(2);
         keyboardNotes[iter].setOutlineColor(sf::Color::Black);
         keyboardNotes[iter].setTexture(&whiteKeyTexture);
@@ -48,7 +49,7 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(800, 600), "Keyboard Window"
         keyboardNotes[iterator].setFillColor(sf::Color::Black);
         keyboardNotes[iterator].setOutlineThickness(2);
         keyboardNotes[iterator].setOutlineColor(sf::Color::Black);
-        keyboardNotes[iterator].setTexture(&blackKeyTexture);
+        // keyboardNotes[iterator].setTexture(&blackKeyTexture);
         xPositionBlackKeys += 66.6;
     }
 }
@@ -113,8 +114,7 @@ void Keyboard::keyboardEvent() {//test for events
     }
 }
 
-void Keyboard::drawKeyboard()
-{
+void Keyboard::drawKeyboard() {
     keyboardWindow.draw(backgroundImage);
     for(int iterate = 0; iterate < 61; iterate++)
     {
@@ -125,7 +125,7 @@ void Keyboard::drawKeyboard()
 void Keyboard::renderWindow() {
     keyboardWindow.clear();
 
-    // Draw stuff here
+    drawKeyboard();
 
     keyboardWindow.display();
 }

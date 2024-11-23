@@ -2,10 +2,13 @@
 #include <iostream>
 #include <SFML/Audio.hpp>
 #include <fstream>
+#include <unordered_map>
+#include <iostream>
 
 // Constructor definition
 Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
+
     for(int pianoIter=0; pianoIter<61; pianoIter++) {
         std::string name = "../assets/sounds/note" + std::to_string(pianoIter) + ".mp3";
         pianoBuffer[pianoIter].loadFromFile(name);
@@ -50,24 +53,78 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     }
 }
 
-void Keyboard::keyboardEvent() {//test for events
+void Keyboard::keyboardEvent() { //test for events
     sf::Event events;
     while (keyboardWindow.pollEvent(events)) {
+        if(events.key.code == sf::Keyboard::Escape) {
+            keyboardWindow.close();
+        }
+        if(events.key.code == sf::Keyboard::Dash) {
+            for(int iter = 0; iter < 36; iter++) {
+                pianoSound[iter].setVolume(40);
+            }
+        }
+        if(events.key.code == sf::Keyboard::Equal) {
+            for(int iter = 0; iter < 36; iter++) {
+                pianoSound[iter].setVolume(80);
+            }
+        }
+
         if (events.type == sf::Event::MouseButtonPressed) {
-            // sf::Vector2i relativePos = sf::Touch::getPosition(1, keyboardWindow);
             std::cout<<"touch is enabled"<<events.mouseButton.button<<"at position("<<events.mouseButton.x<<","<<events.mouseButton.y;
 
+            for(int iterNotes = 0; iterNotes < 36; iterNotes++) {
+                if( (events.mouseButton.x >=keyboardNotes[iterNotes].getPosition().x && events.mouseButton.x <= keyboardNotes[iterNotes+1].getPosition().x)
+                && (events.mouseButton.y >= 900 && events.mouseButton.y <= 1100)){
+                        pianoSound[iterNotes].play();
+                }
+            }
+            for(int iterNotes = 36; iterNotes < 61; iterNotes++) {
+                if( ( events.mouseButton.x >=keyboardNotes[iterNotes].getPosition().x &&
+                     events.mouseButton.x <= (keyboardNotes[iterNotes].getPosition().x)+45.3 )  &&
+                     (events.mouseButton.y >= 700 && events.mouseButton.y <= 900)) {
+                    pianoSound[iterNotes].play();
+                }
+
+            }
         }
+
     }
-    //     if(events.key.code == sf::Keyboard::Escape) {
-    //         keyboardWindow.close();
-    //     }
-    //     if(events.type == sf::Event::KeyPressed){
-    //         pianoSound[events.key.code].play();
-    //     }
-    // }
 }
 
+int Keyboard::charDetectASCII(int unicodeDetect)
+{
+    std::unordered_map<int, int> unicodeIndexMap =
+            {
+        //WHITE KEYS ASCII TO PIANO INDEX
+        //0-9 nums
+        {48,9},{49,0}, {50,1}, {51,2},{52,3},{53,4},{54,5},{55,6},{56,7},{57,8},
+        //lower q-p char
+        {113,10},{119,11},{101,12},{114,13},{116,14},{121,15},{117,16},{105,17},{111,18},{112,19},
+        //lower a-l char
+        {97,20},{115,21},{100,22},{102,23},{103,24},{104,25},{106,26},{107,27},{108,28},
+        //lower z-m char
+        {122,29},{120,30},{99,31},{118,32},{98,33},{110,34},{109,35},
+
+        //BLACK KEYS ASCII TO PIANO INDEX
+        // @# %^& ()
+        {64,36},{35,37},{37,38},{94,39},{38,40},{40,41},{41,42},
+        // QWE TY IOP
+        {81,43},{87,44},{69,45},{84,46},{89,47},{73,48},{79,49},{80,50},
+        // SD GHJ LZ
+        {83,51},{68,52},{71,53},{72,54},{74,55},{76,56},{90,57},
+        //CVB
+        {67,58},{86,59},{66,60}
+            };
+
+    //general template for detection
+    if(unicodeIndexMap.find(unicodeDetect) != unicodeIndexMap.end())
+    {
+        return unicodeIndexMap[unicodeDetect];
+    }
+    else
+        return -1;
+}
 
 void Keyboard::drawKeyboard() {
     keyboardWindow.draw(backgroundImage);
@@ -93,9 +150,30 @@ void Keyboard::runKeyboard() {
 // which continuously checks for events in order. Now, the object events of type sf::Event contains data that we can compare to our existing items,
 // such as Close, Escape, or KeyboardPressed
 
-//Code dump
+//CODE DUMP
 // if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && events.key.code) {
 
 // if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && events.key.code == sf::Keyboard::B) {
 //     pianoSound[events.key.code].play();
+// }
+
+
+// std::ifstream pianoIndexSymbols("pianoIndexLetters.txt");
+// for(int iter= 0; iter < 36; iter++) {
+//     keyboardNotes[iter].setPosition(xPositionWhiteKeys,yPositionWhiteKeys) ;
+//     keyboardNotes[iter].setSize(sf::Vector2f(66.6,400));
+//     keyboardNotes[iter].setFillColor(sf::Color::White);
+//     keyboardNotes[iter].setOutlineThickness(2);
+//     keyboardNotes[iter].setOutlineColor(sf::Color::Black) ;
+//     keyboardNotes[iter].setTexture(&whiteKeyTexture);
+//
+//     if (pianoIndexSymbols.is_open()){
+//     std::string indexSymbol;
+//     std::getline( pianoIndexSymbols, indexSymbol);
+//     keyboardCharacters[iter].setFont (pianoIndexFont) ;
+//     keyboardCharacters[iter].setCharacterSize(50);
+//     keyboardCharacters[iter].setFillCotor(sf::Color::Blue) ;
+//     keyboardCharacters[iter].setString(indexSymbol) ;
+//     keyboardCharacters[iter].xPositionWhiteKeys + 33.3,
+//     keyboardCharacters[iter].setPosition(sf::Vector2f(xPositionWhiteKeys+33.3,yPositionWhiteKeys+50);
 // }

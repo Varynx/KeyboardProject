@@ -181,6 +181,9 @@ void Keyboard::keyboardEvent() { //test for events
                 //     }
                 //     break;
                 // }
+                if(events.key.code == sf::Keyboard::Escape) {
+                    keyboardWindow.close();
+                }
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && events.type == sf::Event::TextEntered) {
                     std::cout<<charDetectASCII(events.text.unicode)<<std::endl;
                     // piano.loopSwitch(charDetectASCII(events.text.unicode));
@@ -243,11 +246,16 @@ int Keyboard::charDetectASCII(int unicodeDetect)
         return -1;
 }
 
-void Keyboard::drawKeyboard() {
+void Keyboard::drawKeyboard() 
+{
     keyboardWindow.draw(backgroundImage);
     for(int iterate = 0; iterate < 61; iterate++)
     {
         keyboardWindow.draw(keyboardNotes[iterate]);
+    }
+    for(int iterator = 0; iterator < 61; iterator++)
+    {
+        keyboardWindow.draw(keyboardCharacters[iterator]);
     }
 }
 

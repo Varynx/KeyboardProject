@@ -6,21 +6,99 @@
 // Constructor definition
 Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
-    for(int pianoIter=0; pianoIter<7; pianoIter++) {
-        std::string name = "../assets/sounds/a" + std::to_string(pianoIter+1) + ".mp3";
-        // std::ifstream file(name);
-        pianoBuffer[pianoIter].loadFromFile(name);
+    for (int pianoIter = 0; pianoIter < sizeOfPiano; pianoIter++) 
+    {
+        std::string name = "../assets/sounds/pianoKeyIndex-mp3/note" + std::to_string(pianoIter) + ".mp3";
+        if (!pianoBuffer[pianoIter].loadFromFile(name))
+        {
+            std::cerr << "Failed to load note";
+        }
         pianoSound[pianoIter].setBuffer(pianoBuffer[pianoIter]);
     }
 
     //loads jpg image from computer (change filepath as needed)
-    backgroundTexture.loadFromFile("../assets/textures/beigeBackground.jpg");
+    backgroundTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/beigeBackground.jpg");
     backgroundImage.setTexture(&backgroundTexture);
-    backgroundImage.setSize(sf::Vector2f(1920,1200));
-    //loads in gradient for white and black key textures (change filepath as needed)
-    whiteKeyTexture.loadFromFile("../assets/textures/beigeToWhite.jpg");
+    backgroundImage.setSize(sf::Vector2f(2400,1600));
 
-    // blackKeyTexture.loadFromFile(" ");
+    //loads in gradient for white and black key textures (change filepath as needed)
+    whiteKeyTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/beigeToWhite.jpg");
+    whiteKeyTextureDark.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/beigeToWhite_Dark.jpg");
+    blackKeyTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/blackGradient.jpg");
+    blackKeyTextureLight.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/blackTextureLight.jpg");
+
+    if(!pianoIndexFont.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/LexendDeca-VariableFont_wght.ttf"))
+    {
+        std::cerr << "Unable to load font." << std::endl;
+    }
+    
+    //FOR PURPOSES OF INITIALIZING THE SPACING BETWEEN THE BLACK KEYS PROPERLY (notes and characters)
+    std::set<int> xPositionSkip = {38,41,43,46,48,51,53,56,58};
+
+    //WHITE KEYS INITIALIZED BELOW
+
+    // START OF PIANO INDEX SYMBOLS INITIALIZATION (lowercase letters, numbers)
+    float xPositionSymbolsWhite = 20;
+    float yPositionSymbolsWhite = 1000;
+
+    std::ifstream pianoIndexSymbolsLower("C:/Users/bauti/KeyboardProjectFiles/pianoIndexLetters_WhiteKeys.txt");
+    if(pianoIndexSymbolsLower.is_open())
+    {
+        int currentIter = 0;
+        std::string indexSymbolsLower;
+        while(std::getline(pianoIndexSymbolsLower,indexSymbolsLower))
+        {
+            keyboardCharacters[currentIter].setFont(pianoIndexFont);
+            keyboardCharacters[currentIter].setCharacterSize(40);
+            keyboardCharacters[currentIter].setFillColor(sf::Color::Black);
+            keyboardCharacters[currentIter].setOutlineColor(sf::Color::White);
+            keyboardCharacters[currentIter].setOutlineThickness(2);
+            keyboardCharacters[currentIter].setString(indexSymbolsLower);
+            keyboardCharacters[currentIter].setPosition(sf::Vector2f(xPositionSymbolsWhite,yPositionSymbolsWhite));
+
+            currentIter++;
+            xPositionSymbolsWhite += 66.6;
+        }
+    }
+    else
+    {
+        std::cerr << "Unable to open file." << std::endl;
+    }
+    pianoIndexSymbolsLower.close();
+
+    // START OF PIANO INDEX SYMBOLS INITIALIZATION (special characters, uppercase letters)
+    float xPositionSymbolsBlack = 53;
+    float yPositionSymbolsBlack = 800;
+    std::ifstream pianoIndexSymbolsUpper("C:/Users/bauti/KeyboardProjectFiles/pianoIndexLetters_BlackKeys.txt");
+    if(pianoIndexSymbolsUpper.is_open())
+    {
+        int currentIter = 36;
+        std::string indexSymbolsUpper;
+        while(std::getline(pianoIndexSymbolsUpper,indexSymbolsUpper))
+        {
+            if(xPositionSkip.find(currentIter) != xPositionSkip.end())
+            {
+                xPositionSymbolsBlack += 66.6;
+            }
+            keyboardCharacters[currentIter].setFont(pianoIndexFont);
+            keyboardCharacters[currentIter].setCharacterSize(30);
+            keyboardCharacters[currentIter].setFillColor(sf::Color::Black);
+            keyboardCharacters[currentIter].setOutlineColor(sf::Color::White);
+            keyboardCharacters[currentIter].setOutlineThickness(2);
+            keyboardCharacters[currentIter].setString(indexSymbolsUpper);
+            keyboardCharacters[currentIter].setPosition(sf::Vector2f(xPositionSymbolsBlack,yPositionSymbolsBlack));
+
+            currentIter++;
+            xPositionSymbolsBlack += 66.6;
+        }
+
+    }
+    else
+    {
+        std::cerr << "Unable to open file." << std::endl;
+    }
+    pianoIndexSymbolsUpper.close();
+
     //WHITE KEYS INITIALIZED BELOW
     float xPositionWhiteKeys = 0;
     float yPositionWhiteKeys = 700;
@@ -28,16 +106,19 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     {
         keyboardNotes[iter].setPosition(xPositionWhiteKeys,yPositionWhiteKeys);
         keyboardNotes[iter].setSize(sf::Vector2f(66.6,400));
-        // keyboardNotes[iter].setFillColor(sf::Color::White);
+        keyboardNotes[iter].setFillColor(sf::Color::White);
         keyboardNotes[iter].setOutlineThickness(2);
         keyboardNotes[iter].setOutlineColor(sf::Color::Black);
         keyboardNotes[iter].setTexture(&whiteKeyTexture);
+
+
         xPositionWhiteKeys += 66.6;
     }
+
     //BLACK KEYS INITIALIZED BELOW
     float xPositionBlackKeys = 45.3;
     float yPositionBlackKeys = 700;
-    std::set<int> xPositionSkip = {38,41,43,46,48,51,53,56,58};
+
     for(int iterator = 36; iterator < 61; iterator++)
     {
         if(xPositionSkip.find(iterator) != xPositionSkip.end())
@@ -46,10 +127,10 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
         }
         keyboardNotes[iterator].setPosition(xPositionBlackKeys,yPositionBlackKeys);
         keyboardNotes[iterator].setSize(sf::Vector2f(40,200));
-        keyboardNotes[iterator].setFillColor(sf::Color::Black);
         keyboardNotes[iterator].setOutlineThickness(2);
         keyboardNotes[iterator].setOutlineColor(sf::Color::Black);
-        // keyboardNotes[iterator].setTexture(&blackKeyTexture);
+        keyboardNotes[iterator].setTexture(&blackKeyTexture);
+
         xPositionBlackKeys += 66.6;
     }
 }

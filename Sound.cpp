@@ -1,12 +1,16 @@
 #include "Sound.h"
 #include <array>
+#include <iostream>
 
 Sound::Sound() {
-    for(int pianoIter=0; pianoIter<61; pianoIter++) {
-        std::string name = "../assets/sounds/note" + std::to_string(pianoIter) + ".mp3";
-        pianoBuffer[pianoIter].loadFromFile(name);
+    for (int pianoIter = 0; pianoIter < 61; pianoIter++)
+    {
+        std::string name = "../assets/sounds/pianoKeyIndex-mp3/note" + std::to_string(pianoIter) + ".mp3";
+        if (!pianoBuffer[pianoIter].loadFromFile(name))
+        {
+            std::cerr << "Failed to load note";
+        }
         pianoSound[pianoIter].setBuffer(pianoBuffer[pianoIter]);
-        pianoSound[pianoIter].setLoop(false);
     }
 
 }

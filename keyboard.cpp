@@ -8,15 +8,6 @@
 // Constructor definition
 Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
-    for (int pianoIter = 0; pianoIter < sizeOfPiano; pianoIter++)
-    {
-        std::string name = "../assets/sounds/pianoKeyIndex-mp3/note" + std::to_string(pianoIter) + ".mp3";
-        if (!pianoBuffer[pianoIter].loadFromFile(name))
-        {
-            std::cerr << "Failed to load note";
-        }
-        pianoSound[pianoIter].setBuffer(pianoBuffer[pianoIter]);
-    }
 
     //loads jpg image from computer
     backgroundTexture.loadFromFile("../assets/textures/beigeBackground.jpg");
@@ -24,12 +15,12 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     backgroundImage.setSize(sf::Vector2f(2400,1600));
 
     //loads in gradient for white and black key textures (change filepath as needed)
-    whiteKeyTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/beigeToWhite.jpg");
-    whiteKeyTextureDark.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/beigeToWhite_Dark.jpg");
-    blackKeyTexture.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/blackGradient.jpg");
-    blackKeyTextureLight.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/blackTextureLight.jpg");
+    whiteKeyTexture.loadFromFile("../assets/textures/beigeToWhite.jpg");
+    whiteKeyTextureDark.loadFromFile("../assets/textures/beigeToWhite_Dark.jpg");
+    blackKeyTexture.loadFromFile("../assets/textures/blackGradient.jpg");
+    blackKeyTextureLight.loadFromFile("../assets/textures/blackTextureLight.jpg");
 
-    if(!pianoIndexFont.loadFromFile("C:/Users/bauti/KeyboardProjectFiles/LexendDeca-VariableFont_wght.ttf"))
+    if(!pianoIndexFont.loadFromFile("../assets/fonts/LexendDeca-VariableFont_wght.ttf"))
     {
         std::cerr << "Unable to load font." << std::endl;
     }
@@ -43,7 +34,7 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     float xPositionSymbolsWhite = 20;
     float yPositionSymbolsWhite = 1000;
 
-    std::ifstream pianoIndexSymbolsLower("C:/Users/bauti/KeyboardProjectFiles/pianoIndexLetters_WhiteKeys.txt");
+    std::ifstream pianoIndexSymbolsLower("../assets/textFiles/pianoIndexLetters_WhiteKeys.txt");
     if(pianoIndexSymbolsLower.is_open())
     {
         int currentIter = 0;
@@ -71,7 +62,7 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     // START OF PIANO INDEX SYMBOLS INITIALIZATION (special characters, uppercase letters)
     float xPositionSymbolsBlack = 53;
     float yPositionSymbolsBlack = 800;
-    std::ifstream pianoIndexSymbolsUpper("C:/Users/bauti/KeyboardProjectFiles/pianoIndexLetters_BlackKeys.txt");
+    std::ifstream pianoIndexSymbolsUpper("../assets/textFiles/pianoIndexLetters_BlackKeys.txt");
     if(pianoIndexSymbolsUpper.is_open())
     {
         int currentIter = 36;

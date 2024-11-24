@@ -124,7 +124,59 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     }
 }
 
-void Keyboard::keyboardEvent() { //test for events
+/*
+void Keyboard::keyboardEvent(char presetOption)
+{
+    std::cout << presetOption << "reset Option" << std::endl;
+    sf::Event events;
+
+    std::ifstream presetNotes("C:/Users/bauti/KeyboardProjectFiles/firstFourMeasuresOfOp10_1.txt");
+
+    if(!presetNotes.is_open())
+    {
+        std::cerr << "Unable to open preset music file." << std::endl;
+    }
+
+    while(keyboardWindow.pollEvent(events))
+    {
+
+        sf::Uint32 unicodeConvert;
+        char currentChar;
+        
+        if(sf::Event::KeyPressed)
+        {
+            while(presetNotes.get(currentChar))
+            {
+                unicodeConvert = static_cast<sf::Uint32>(currentChar);
+
+                int soundIndex = charDetectASCII(unicodeConvert);
+
+                //accounts for gaps in the ASCII range, where there are no corresponding keyboard inputs for the piano simulator
+                if (soundIndex == -1) { break; }
+
+                //suppose a white key was pressed, change white key texture
+                if(soundIndex <= 35)
+                {
+                    pianoSound[soundIndex].play();
+                    keyboardNotes[soundIndex].setTexture(&whiteKeyTextureDark);
+                }
+                    //suppose a black key was pressed, change black key texture
+                else
+                {
+                    pianoSound[soundIndex].play();
+                    keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight);
+                }
+                sf::sleep(sf::milliseconds(100));
+            }
+        }
+    }
+}
+*/
+
+// for default simulator event
+// void Keyboard::keyboardEvent(int)     
+void Keyboard::keyboardEvent() 
+{ //test for events
     sf::Event events{};
     while (keyboardWindow.pollEvent(events)) {
         {

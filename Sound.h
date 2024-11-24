@@ -18,6 +18,7 @@ public:
 
     // Events
     void playSound(sf::Event, std::array<sf::RectangleShape,61>);
+    void playSound(int soundIndex);
 
     void increaseVolume();
 

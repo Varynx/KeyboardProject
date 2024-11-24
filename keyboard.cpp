@@ -108,7 +108,6 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     //BLACK KEYS INITIALIZED BELOW
     float xPositionBlackKeys = 45.3;
     float yPositionBlackKeys = 700;
-    std::set<int> xPositionSkip = {38,41,43,46,48,51,53,56,58};
     for(int iterator = 36; iterator < 61; iterator++)
     {
         if(xPositionSkip.find(iterator) != xPositionSkip.end())
@@ -128,31 +127,82 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
 void Keyboard::keyboardEvent() { //test for events
     sf::Event events{};
     while (keyboardWindow.pollEvent(events)) {
-        if (events.type == sf::Event::KeyPressed) {
-            if(events.key.code == sf::Keyboard::Escape) {
-                keyboardWindow.close();
+        {
+            //loops reset the textures of all the notes when not pressed
+            for (int iter = 0; iter < 36; iter++)
+            {
+                keyboardNotes[iter].setTexture(&whiteKeyTexture);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && events.type == sf::Event::TextEntered) {
-                std::cout<<charDetectASCII(events.text.unicode)<<std::endl;
-                // piano.loopSwitch(charDetectASCII(events.text.unicode));
+
+            for (int iterator = 36; iterator < 61; iterator++)
+            {
+                keyboardNotes[iterator].setTexture(&blackKeyTexture);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Equal)) {
-                // piano.increaseVolume();
+
+            if (events.type == sf::Event::KeyPressed) {
+                // switch(events.type){
+                // case sf::Event::Closed:
+                //     keyboardWindow.close();
+                //     break;
+                //
+                // case sf::Event::TextEntered:
+                //     if (events.text.unicode == 27)
+                //     {
+                //         keyboardWindow.close();
+                //     }
+                //     //suppose the valid range of inputs for all 61 notes
+                //     else if (events.text.unicode >= 33 && events.text.unicode <= 122)
+                //     {
+                //         int soundIndex;
+                //         //method will find the corresponding piano index for the given keyboard input, assigned to variable soundIndex
+                //         soundIndex = charDetectASCII(events.text.unicode);
+                //
+                //         //accounts for gaps in the ASCII range, where there are no corresponding keyboard inputs for the piano simulator
+                //         if (soundIndex == -1) { break; }
+                //
+                //         //suppose a white key was pressed, change white key texture
+                //         if(soundIndex <= 35)
+                //         {
+                //             piano.playSound(soundIndex);
+                //             keyboardNotes[soundIndex].setTexture(&whiteKeyTextureDark);
+                //         }
+                //         //suppose a black key was pressed, change black key texture
+                //         else
+                //         {
+                //             piano.playSound(soundIndex);
+                //             keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight);
+                //             sf::Color grayColor(128,128,128);
+                //         }
+                //
+                //     }
+                //     else
+                //     {
+                //         std::cout << "Error! Try again." << std::endl;
+                //     }
+                //     break;
+                // }
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && events.type == sf::Event::TextEntered) {
+                    std::cout<<charDetectASCII(events.text.unicode)<<std::endl;
+                    // piano.loopSwitch(charDetectASCII(events.text.unicode));
+                }
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Equal)) {
+                    // piano.increaseVolume();
+                }
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Dash)) {
+                    piano.decreaseVolume();
+                }
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::RBracket)) {
+                    piano.increasePitch();
+                }
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::LBracket)) {
+                    piano.decreasePitch();
+                }
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Dash)) {
-                piano.decreaseVolume();
-            }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::RBracket)) {
-                piano.increasePitch();
-            }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::LBracket)) {
-                piano.decreasePitch();
-            }
-        }
-        if(events.type == sf::Event::MouseButtonPressed){
-            if (events.type == sf::Event::MouseButtonPressed) {
-                std::cout<<"touch is enabled"<<events.mouseButton.button<<"at position("<<events.mouseButton.x<<","<<events.mouseButton.y;
-                piano.playSound(events, keyboardNotes);
+            if(events.type == sf::Event::MouseButtonPressed){
+                if (events.type == sf::Event::MouseButtonPressed) {
+                    std::cout<<"touch is enabled"<<events.mouseButton.button<<"at position("<<events.mouseButton.x<<","<<events.mouseButton.y;
+                    piano.playSound(events, keyboardNotes);
+                }
             }
         }
 

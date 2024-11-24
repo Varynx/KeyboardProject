@@ -29,6 +29,10 @@ void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboa
         }
     }
 }
+void Sound::playSound(int soundIndex) {
+    pianoSound[soundIndex].play();
+}
+
 
 
 void Sound::increaseVolume() {

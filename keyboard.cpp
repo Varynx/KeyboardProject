@@ -135,62 +135,64 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     }
 }
 
-void Keyboard::keyboardEvent() {//test for events
+void Keyboard::keyboardEvent() 
+{//test for events
     sf::Event events;
-    while (keyboardWindow.pollEvent(events)) {
-        if(events.type == sf::Event::KeyPressed) {
-            switch(events.key.code) {
-                case sf::Keyboard::Escape: {
-                    keyboardWindow.close();
-                    break;
-                }
-                case sf::Keyboard::A: {
-                    pianoSound[0].play();
-                    std::cout<< "A\n";
-                    break;
-                }
-                case sf::Keyboard::S: {
-                    pianoSound[1].play();
-                    std::cout<< "S\n";
-                    break;
-                }
-                case sf::Keyboard::D: {
-                    pianoSound[2].play();
-                    std::cout<< "D\n";
-                    break;
-                }
-                case sf::Keyboard::F: {
-                    pianoSound[3].play();
-                    std::cout<< "F\n";
-                    break;
-                }
-                case sf::Keyboard::G: {
-                    pianoSound[4].play();
-                    std::cout<< "G\n";
-                    break;
-                }
-                case sf::Keyboard::H: {
-                    pianoSound[5].play();
-                    std::cout<< "H\n";
-                    break;
-                }
-                case sf::Keyboard::J: {
-                    pianoSound[6].play();
-                    std::cout<< "J\n";
-                    break;
-                }
-                case sf::Keyboard::K: {
-                    // pianoSound[7].play();
-                    std::cout<< "K\n";
-                    break;
-                }
-                case sf::Keyboard::L: {
-                    // pianoSound[8].play();
-                    std::cout<< "L\n";
-                    break;
-                }
 
-            }
+    while (keyboardWindow.pollEvent(events))
+    {
+        //loops reset the textures of all the notes when not pressed
+        for (int iter = 0; iter < 36; iter++)
+        {
+            keyboardNotes[iter].setTexture(&whiteKeyTexture);
+        }
+
+        for (int iterator = 36; iterator < 61; iterator++)
+        {
+            keyboardNotes[iterator].setTexture(&blackKeyTexture);
+        }
+
+        switch(events.type)
+        {
+            case sf::Event::Closed:
+                keyboardWindow.close();
+                break;
+
+            case sf::Event::TextEntered:
+                if (events.text.unicode == 27)
+                {
+                    keyboardWindow.close();
+                }
+                //suppose the valid range of inputs for all 61 notes
+                else if (events.text.unicode >= 33 && events.text.unicode <= 122)
+                {
+                    int soundIndex;
+                    //method will find the corresponding piano index for the given keyboard input, assigned to variable soundIndex
+                    soundIndex = charDetectASCII(events.text.unicode);
+
+                    //accounts for gaps in the ASCII range, where there are no corresponding keyboard inputs for the piano simulator
+                    if (soundIndex == -1) { break; }
+
+                    //suppose a white key was pressed, change white key texture
+                    if(soundIndex <= 35)
+                    {
+                        pianoSound[soundIndex].play();
+                        keyboardNotes[soundIndex].setTexture(&whiteKeyTextureDark);
+                    }
+                    //suppose a black key was pressed, change black key texture
+                    else
+                    {
+                        pianoSound[soundIndex].play();
+                        keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight);
+                        sf::Color grayColor(128,128,128);
+                    }
+
+                }
+                else
+                {
+                    std::cout << "Error! Try again." << std::endl;
+                }
+                break;
         }
     }
 }

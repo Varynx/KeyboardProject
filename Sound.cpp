@@ -3,7 +3,7 @@
 #include <iostream>
 
 Sound::Sound() {
-    for (int pianoIter = 0; pianoIter < 61; pianoIter++)
+    for (int pianoIter = 0; pianoIter < sizeOfPiano; pianoIter++)
     {
         std::string name = "../assets/sounds/note" + std::to_string(pianoIter) + ".mp3";
         if (!pianoBuffer[pianoIter].loadFromFile(name))

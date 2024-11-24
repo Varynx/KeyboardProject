@@ -8,11 +8,7 @@
 class Keyboard {
 private:
     sf::RenderWindow keyboardWindow;
-    int sizeOfPiano = 61;
     Sound piano;
-
-    std::array<sf::SoundBuffer,61> pianoBuffer;
-    std::array<sf::Sound,61> pianoSound;
 
     sf::RectangleShape backgroundImage;
     sf::Texture backgroundTexture;

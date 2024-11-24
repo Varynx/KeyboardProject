@@ -5,7 +5,7 @@
 Sound::Sound() {
     for (int pianoIter = 0; pianoIter < 61; pianoIter++)
     {
-        std::string name = "../assets/sounds/pianoKeyIndex-mp3/note" + std::to_string(pianoIter) + ".mp3";
+        std::string name = "../assets/sounds/note" + std::to_string(pianoIter) + ".mp3";
         if (!pianoBuffer[pianoIter].loadFromFile(name))
         {
             std::cerr << "Failed to load note";
@@ -15,7 +15,22 @@ Sound::Sound() {
 
 }
 
-void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboardNotes) {
+void Sound::soundFunctions() {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Equal)) {
+        increaseVolume();
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Dash)) {
+        decreaseVolume();
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::RBracket)) {
+        increasePitch();
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LBracket)) {
+        decreasePitch();
+    }
+}
+
+void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboardNotes) {//play sound with mouse/touch
     for(int iterNotes = 0; iterNotes < 36; iterNotes++) {
         if( (events.mouseButton.x >=keyboardNotes[iterNotes].getPosition().x && events.mouseButton.x <= keyboardNotes[iterNotes+1].getPosition().x)
         && (events.mouseButton.y >= 900 && events.mouseButton.y <= 1100)){
@@ -29,15 +44,13 @@ void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboa
         }
     }
 }
-void Sound::playSound(int soundIndex) {
+void Sound::playSound(int soundIndex) {//play sound with key presses
     pianoSound[soundIndex].play();
 }
 
-
-
 void Sound::increaseVolume() {
     pianoVolume++;
-    for(int iter = 0; iter < 61; iter++) {
+    for(int iter = 0; iter < sizeOfPiano; iter++) {
         if(pianoVolume > 100) {
             pianoVolume = 100;
         }
@@ -47,7 +60,7 @@ void Sound::increaseVolume() {
 
 void Sound::decreaseVolume() {
     pianoVolume--;
-    for(int iter = 0; iter < 61; iter++) {
+    for(int iter = 0; iter < sizeOfPiano; iter++) {
         if(pianoVolume < 0) {
             pianoVolume = 0;
         }
@@ -56,7 +69,7 @@ void Sound::decreaseVolume() {
 }
 void Sound::increasePitch() {
     pianoPitch+=0.2;
-    for(int iter = 0; iter < 61; iter++) {
+    for(int iter = 0; iter < sizeOfPiano; iter++) {
         if(pianoPitch > 4) {
             pianoPitch = 4;
         }
@@ -66,7 +79,7 @@ void Sound::increasePitch() {
 
 void Sound::decreasePitch() {
     pianoPitch-=0.2;
-    for(int iter = 0; iter < 61; iter++) {
+    for(int iter = 0; iter < sizeOfPiano; iter++) {
         if(pianoPitch < 0.2) {
             pianoPitch = 0.2;
         }

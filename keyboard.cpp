@@ -129,7 +129,7 @@ void Keyboard::keyboardEvent() {
 
     while (keyboardWindow.pollEvent(events)) {
 
-        // Reset the textures of all the notes when no keys are pressed
+        //loops reset the textures of all the notes when not pressed
         for (int iter = 0; iter < 36; iter++) {
             keyboardNotes[iter].setTexture(&whiteKeyTexture);
         }
@@ -138,48 +138,56 @@ void Keyboard::keyboardEvent() {
         }
 
         // Handle Keyboard Events
-        if (events.type == sf::Event::KeyPressed) {
-            if(events.key.code == sf::Keyboard::Escape) {
-                keyboardWindow.close();
-            }
-            piano.soundFunctions();//volume,pitch
-
-        }
-
-        // Handle TextEntered Events
-        if (events.type == sf::Event::TextEntered) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Grave)) {
-                std::cout<<events.text.unicode<<"\n";
-                int soundIndex = charDetectASCII(events.text.unicode); // Get the note index
-                std::cout<<soundIndex<<"\n";
-                if (soundIndex != -1) {
-                    piano.loopSwitch(soundIndex);
+        switch (events.type){
+            case sf::Event::KeyPressed:
+                if(events.key.code == sf::Keyboard::Escape) {
+                    keyboardWindow.close();
                 }
-            }
-            // Check if the input character is within the valid range for notes
-            if (events.text.unicode >= 33 && events.text.unicode <= 122) {
-                int soundIndex = charDetectASCII(events.text.unicode);
+                piano.soundFunctions();//volume,pitch
+            break;
 
-                if (soundIndex != -1) {
-                    // Play sound and update the texture of the pressed key
-                    piano.playSound(soundIndex);
-                    if (soundIndex <= 35) {
-                        keyboardNotes[soundIndex].setTexture(&whiteKeyTextureDark); // White key pressed
-                    } else {
-                        keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight); // Black key pressed
+            case sf::Event::TextEntered:
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Grave)) {
+                    std::cout<<events.text.unicode<<"\n";
+                    int soundIndex = charDetectASCII(events.text.unicode);
+                    std::cout<<soundIndex<<"\n";
+                    if (soundIndex != -1) {
+                        piano.loopSwitch(soundIndex);
                     }
                 }
-            }
-            else {
-                std::cout << "Error! Try again." << std::endl; // Invalid character
-            }
-        }
+                //suppose the valid range of inputs for all 61 notes
+                else if(events.text.unicode >= 33 && events.text.unicode <= 122) {
+                    //method will find the corresponding piano index for the given keyboard input, assigned to variable soundIndex
+                    int soundIndex = charDetectASCII(events.text.unicode);
 
-        // Mouse clicks
-        if (events.type == sf::Event::MouseButtonPressed) {
-            std::cout << "Touch is enabled at position ("
-                      << events.mouseButton.x << "," << events.mouseButton.y << ")\n";
-            piano.playSound(events, keyboardNotes); // Play sound based on mouse click
+                    //accounts for gaps in the ASCII range, where there are no corresponding keyboard inputs for the piano simulator
+                    if (soundIndex == -1) {
+                        break;
+                    }
+                    //suppose a white key was pressed, change white key texture
+                    if (soundIndex <= 35) {
+                        piano.playSound(soundIndex);
+                        keyboardNotes[soundIndex].setTexture(&whiteKeyTextureDark);
+                    }
+                    //suppose a black key was pressed, change black key texture
+                    else {
+                        piano.playSound(soundIndex);
+                        keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight);
+                    }
+                }
+                else {
+                    std::cout << "Error! Try again." << std::endl; // Invalid character
+                }
+                break;
+
+            // Mouse clicks
+            case sf::Event::MouseButtonPressed:
+                std::cout << "Touch is enabled at position ("
+                          << events.mouseButton.x << "," << events.mouseButton.y << ")\n";
+                piano.playSound(events, keyboardNotes); // Play sound based on mouse click
+                break;
+
+            default: ;
         }
     }
 }

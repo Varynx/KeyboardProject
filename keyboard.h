@@ -8,8 +8,11 @@
 class Keyboard {
 private:
     sf::RenderWindow keyboardWindow;
-
+    int sizeOfPiano = 61;
     Sound piano;
+
+    std::array<sf::SoundBuffer,61> pianoBuffer;
+    std::array<sf::Sound,61> pianoSound;
 
     sf::RectangleShape backgroundImage;
     sf::Texture backgroundTexture;
@@ -26,6 +29,9 @@ public:
     // Constructor
     Keyboard();
 
+    //potential differing events for default/preset piano simulator options
+    //void keyboardEvent(char presetMode);
+    //void keyboardEvent(int defaultMode);
     // Events
     void keyboardEvent();
 

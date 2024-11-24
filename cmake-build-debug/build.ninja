@@ -63,6 +63,13 @@ build CMakeFiles/KeyboardProject.dir/keyboard.cpp.obj: CXX_COMPILER__KeyboardPro
   OBJECT_DIR = CMakeFiles\KeyboardProject.dir
   OBJECT_FILE_DIR = CMakeFiles\KeyboardProject.dir
 
+build CMakeFiles/KeyboardProject.dir/Sound.cpp.obj: CXX_COMPILER__KeyboardProject_unscanned_Debug C$:/Programming-Gustavo/COP$ 3003/KeyboardProject/Sound.cpp || cmake_object_order_depends_target_KeyboardProject
+  DEP_FILE = CMakeFiles\KeyboardProject.dir\Sound.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/include
+  OBJECT_DIR = CMakeFiles\KeyboardProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\KeyboardProject.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target KeyboardProject
@@ -71,7 +78,7 @@ build CMakeFiles/KeyboardProject.dir/keyboard.cpp.obj: CXX_COMPILER__KeyboardPro
 #############################################
 # Link the executable KeyboardProject.exe
 
-build KeyboardProject.exe: CXX_EXECUTABLE_LINKER__KeyboardProject_Debug CMakeFiles/KeyboardProject.dir/main.cpp.obj CMakeFiles/KeyboardProject.dir/keyboard.cpp.obj | C$:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-audio-d.a C$:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-graphics-d.a C$:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-window-d.a C$:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-system-d.a
+build KeyboardProject.exe: CXX_EXECUTABLE_LINKER__KeyboardProject_Debug CMakeFiles/KeyboardProject.dir/main.cpp.obj CMakeFiles/KeyboardProject.dir/keyboard.cpp.obj CMakeFiles/KeyboardProject.dir/Sound.cpp.obj | C$:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-audio-d.a C$:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-graphics-d.a C$:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-window-d.a C$:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-system-d.a
   FLAGS = -g
   LINK_LIBRARIES = C:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-audio-d.a  C:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-graphics-d.a  C:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-window-d.a  -lopengl32  C:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/debug/lib/libsfml-system-d.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\KeyboardProject.dir

@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(KeyboardProject main.cpp
         keyboard.h
         keyboard.cpp
+        Sound.cpp
+        Sound.h
 )
 
 set(CMAKE_PREFIX_PATH SFML "C:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/share/sfml")

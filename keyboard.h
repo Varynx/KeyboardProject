@@ -2,14 +2,14 @@
 #define KEYBOARD_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <array>
+#include "Sound.h"
 
 class Keyboard {
 private:
     sf::RenderWindow keyboardWindow;
-    sf::SoundBuffer pianoBuffer[61];
-    sf::Sound pianoSound[61];
+
+    Sound piano;
 
     sf::RectangleShape backgroundImage;
     sf::Texture backgroundTexture;
@@ -27,7 +27,7 @@ public:
     // Draws each piano note
     void drawKeyboard();
 
-    int charDetectASCII(int);
+    static int charDetectASCII(int);
 
     // Draws each piano note
     void runKeyboard();

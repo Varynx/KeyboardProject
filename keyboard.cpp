@@ -5,12 +5,14 @@
 #include <iostream>
 #include <unordered_map>
 
-// Constructor definition
+/**
+ * Basic constructor
+ */
 Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
 
     //loads jpg image from computer
-    backgroundTexture.loadFromFile("../assets/textures/goatedBackground.jpg");
+    backgroundTexture.loadFromFile("../assets/textures/beigeBackground.jpg");
     backgroundImage.setTexture(&backgroundTexture);
     backgroundImage.setSize(sf::Vector2f(2400,1600));
 
@@ -175,6 +177,10 @@ void Keyboard::keyboardEvent(char presetOption)
 
 // for default simulator event
 // void Keyboard::keyboardEvent(int)
+
+/** Everything to do with the keys, from texture changes,
+ *  playing sounds, and detecting mouse presses in response to input
+ */
 void Keyboard::keyboardEvent()
 { //test for events
     sf::Event events{};
@@ -243,6 +249,11 @@ void Keyboard::keyboardEvent()
     }
 }
 
+/** detects ASCII characters entered
+ *
+ * @param unicodeDetect we pass the unicode to this function
+ * @return return numerical value of button pressed
+ */
 int Keyboard::charDetectASCII(int unicodeDetect)
 {
     std::unordered_map<int, int> unicodeIndexMap =
@@ -277,7 +288,10 @@ int Keyboard::charDetectASCII(int unicodeDetect)
         return -1;
 }
 
-void Keyboard::drawKeyboard() 
+/** Draws the keyboard, each key, etc.
+ *
+ */
+void Keyboard::drawKeyboard()
 {
     keyboardWindow.draw(backgroundImage);
     for(int iterate = 0; iterate < 61; iterate++)
@@ -290,13 +304,19 @@ void Keyboard::drawKeyboard()
     }
 }
 
+/** Renders the window
+ *
+ */
 void Keyboard::renderWindow() {
     keyboardWindow.clear();
     drawKeyboard();
     keyboardWindow.display();
 }
 
-void Keyboard::runKeyboard() 
+/** Runs the keyboard
+ *
+ */
+void Keyboard::runKeyboard()
 {
     while (keyboardWindow.isOpen()) 
     {
@@ -343,3 +363,52 @@ void Keyboard::runKeyboard()
 // if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && events.key.code == sf::Keyboard::B) {
 //     pianoSound[events.key.code].play();
 // }
+
+/*
+void Keyboard::keyboardEvent(char presetOption)
+{
+    std::cout << presetOption << "reset Option" << std::endl;
+    sf::Event events;
+
+    std::ifstream presetNotes("C:/Users/bauti/KeyboardProjectFiles/firstFourMeasuresOfOp10_1.txt");
+
+    if(!presetNotes.is_open())
+    {
+        std::cerr << "Unable to open preset music file." << std::endl;
+    }
+
+    while(keyboardWindow.pollEvent(events))
+    {
+
+        sf::Uint32 unicodeConvert;
+        char currentChar;
+
+        if(sf::Event::KeyPressed)
+        {
+            while(presetNotes.get(currentChar))
+            {
+                unicodeConvert = static_cast<sf::Uint32>(currentChar);
+
+                int soundIndex = charDetectASCII(unicodeConvert);
+
+                //accounts for gaps in the ASCII range, where there are no corresponding keyboard inputs for the piano simulator
+                if (soundIndex == -1) { break; }
+
+                //suppose a white key was pressed, change white key texture
+                if(soundIndex <= 35)
+                {
+                    pianoSound[soundIndex].play();
+                    keyboardNotes[soundIndex].setTexture(&whiteKeyTextureDark);
+                }
+                    //suppose a black key was pressed, change black key texture
+                else
+                {
+                    pianoSound[soundIndex].play();
+                    keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight);
+                }
+                sf::sleep(sf::milliseconds(100));
+            }
+        }
+    }
+}
+*/

@@ -16,8 +16,9 @@ public:
     // Constructor
     Sound();
 
-    // Events
+    // Methods
     void playSound(sf::Event, std::array<sf::RectangleShape,61>);
+
     void playSound(int soundIndex);
 
     void soundFunctions();
@@ -30,7 +31,7 @@ public:
 
     void decreasePitch();
 
-    void loopSwitch(int loopNote);
+    void loopSwitch(int soundIndex);
 
 
 };

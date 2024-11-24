@@ -34,6 +34,7 @@ public:
     // Draws each piano note
     void drawKeyboard();
 
+    // detects ASCII character entered
     static int charDetectASCII(int);
 
     // Draws each piano note

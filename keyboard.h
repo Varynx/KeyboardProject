@@ -11,10 +11,6 @@ private:
 
     Sound piano;
 
-    int sizeOfPiano = 61;
-    std::array<sf::SoundBuffer,61> pianoBuffer;
-    std::array<sf::Sound,61> pianoSound;
-
     sf::RectangleShape backgroundImage;
     sf::Texture backgroundTexture;
 

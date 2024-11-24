@@ -3,10 +3,13 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <array>
 
 class Sound {
-    sf::SoundBuffer pianoBuffer[61];
-    sf::Sound pianoSound[61];
+    int sizeOfPiano = 61;
+    std::array<sf::SoundBuffer,61> pianoBuffer;
+    std::array<sf::Sound,61> pianoSound;
+
     int pianoVolume=100;
     float pianoPitch = 1.0;
 public:

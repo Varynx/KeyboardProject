@@ -231,11 +231,16 @@ int Keyboard::charDetectASCII(int unicodeDetect)
         return -1;
 }
 
-void Keyboard::drawKeyboard() {
+void Keyboard::drawKeyboard() 
+{
     keyboardWindow.draw(backgroundImage);
-    for(int iterate = 0; iterate < 61; iterate++)
+    for(int iterate = 0; iterate < sizeOfPiano; iterate++)
     {
         keyboardWindow.draw(keyboardNotes[iterate]);
+    }
+    for(int iterator = 0; iterator < sizeOfPiano; iterator++)
+    {
+        keyboardWindow.draw(keyboardCharacters[iterator]);
     }
 }
 

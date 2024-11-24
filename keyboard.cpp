@@ -317,11 +317,42 @@ void Keyboard::renderWindow() {
     keyboardWindow.display();
 }
 
-void Keyboard::runKeyboard() {
-    while (keyboardWindow.isOpen()) {
+void Keyboard::runKeyboard() 
+{
+    while (keyboardWindow.isOpen()) 
+    {
         keyboardEvent();  // Handles events (keyboard, mouse)
         renderWindow();   // clear and draw
     }
+
+    //POTENTIAL POLYMORPHIC PROGRAM TOO HANDLE DIFFERENT PIANO SIMULATION OPTIONS
+    /*
+        int userDecision;
+    char presetDecision = 'P';
+    int defaultDecision = 1;
+
+    std::cout << "Default mode[1] or preset mode[other]?";
+    std::cin >> userDecision;
+
+    if(userDecision == defaultDecision)
+    {
+        while (keyboardWindow.isOpen())
+        {
+            keyboardEvent(defaultDecision);
+            renderWindow();
+        }
+    }
+
+    else
+    {
+        while (keyboardWindow.isOpen())
+        {
+            keyboardEvent(presetDecision);
+            renderWindow();
+
+        }
+    }
+    */
 }
 // SFML has internal events, which are stored somewhere. The object named events we created stores the events that come from the pollEvent function,
 // which continuously checks for events in order. Now, the object events of type sf::Event contains data that we can compare to our existing items,

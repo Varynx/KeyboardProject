@@ -5,12 +5,14 @@
 #include <iostream>
 #include <unordered_map>
 
-// Constructor definition
+/**
+ * Basic constructor
+ */
 Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1080), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
 
     //loads jpg image from computer
-    backgroundTexture.loadFromFile("../assets/textures/goatedBackground.jpg");
+    backgroundTexture.loadFromFile("../assets/textures/beigeBackground.jpg");
     backgroundImage.setTexture(&backgroundTexture);
     backgroundImage.setSize(sf::Vector2f(1920,1080));
 
@@ -176,6 +178,10 @@ void Keyboard::keyboardEvent(char presetOption)
 
 // for default simulator event
 // void Keyboard::keyboardEvent(int)
+
+/** Everything to do with the keys, from texture changes,
+ *  playing sounds, and detecting mouse presses in response to input
+ */
 void Keyboard::keyboardEvent(int defaultOption)
 { //test for events
     sf::Event events{};
@@ -244,6 +250,11 @@ void Keyboard::keyboardEvent(int defaultOption)
     }
 }
 
+/** detects ASCII characters entered
+ *
+ * @param unicodeDetect we pass the unicode to this function
+ * @return return numerical value of button pressed
+ */
 int Keyboard::charDetectASCII(int unicodeDetect)
 {
     std::unordered_map<int, int> unicodeIndexMap =
@@ -278,7 +289,10 @@ int Keyboard::charDetectASCII(int unicodeDetect)
         return -1;
 }
 
-void Keyboard::drawKeyboard() 
+/** Draws the keyboard, each key, etc.
+ *
+ */
+void Keyboard::drawKeyboard()
 {
     keyboardWindow.draw(backgroundImage);
     for(int iterate = 0; iterate < 61; iterate++)
@@ -291,13 +305,19 @@ void Keyboard::drawKeyboard()
     }
 }
 
+/** Renders the window
+ *
+ */
 void Keyboard::renderWindow() {
     keyboardWindow.clear();
     drawKeyboard();
     keyboardWindow.display();
 }
 
-void Keyboard::runKeyboard() 
+/** Runs the keyboard
+ *
+ */
+void Keyboard::runKeyboard()
 {
     //POTENTIAL POLYMORPHIC PROGRAM TOO HANDLE DIFFERENT PIANO SIMULATION OPTIONS
     int userDecision;

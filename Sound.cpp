@@ -2,6 +2,9 @@
 #include <array>
 #include <iostream>
 
+/**
+ * Basic constructor
+ */
 Sound::Sound() {
     for (int pianoIter = 0; pianoIter < sizeOfPiano; pianoIter++)
     {
@@ -15,6 +18,9 @@ Sound::Sound() {
 
 }
 
+/**
+ * Used to change volume and pitch
+ */
 void Sound::soundFunctions() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Equal)) {
         increaseVolume();
@@ -30,7 +36,12 @@ void Sound::soundFunctions() {
     }
 }
 
-void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboardNotes) {//play sound with mouse/touch
+/**
+ * play sound with mouse/touch
+ * @param events - detects events for mouse click
+ * @param keyboardNotes - Get relative position of the physical note shapes, like their boundaries
+ */
+void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboardNotes) {
     for(int iterNotes = 0; iterNotes < 36; iterNotes++) {
         if( ( events.mouseButton.x >=keyboardNotes[iterNotes].getPosition().x && events.mouseButton.x <= (keyboardNotes[iterNotes].getPosition().x)+53.28 )
         && (events.mouseButton.y >= 900 && events.mouseButton.y <= 1020)){
@@ -44,10 +55,18 @@ void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboa
         }
     }
 }
-void Sound::playSound(int soundIndex) {//play sound with key presses
+
+/**
+ * play sound with key presses according to the sound Index in Keyboard.cpp
+ * @param soundIndex - button pressed
+ */
+void Sound::playSound(int soundIndex) {
     pianoSound[soundIndex].play();
 }
 
+/**
+ * Function to increase volume
+ */
 void Sound::increaseVolume() {
     pianoVolume++;
     for(int iter = 0; iter < sizeOfPiano; iter++) {
@@ -58,6 +77,9 @@ void Sound::increaseVolume() {
     }
 }
 
+/**
+ * Function to decrease volume
+ */
 void Sound::decreaseVolume() {
     pianoVolume--;
     for(int iter = 0; iter < sizeOfPiano; iter++) {
@@ -67,6 +89,10 @@ void Sound::decreaseVolume() {
         pianoSound[iter].setVolume(pianoVolume);
     }
 }
+
+/**
+ * Function to increase Pitch
+ */
 void Sound::increasePitch() {
     pianoPitch+=0.2;
     for(int iter = 0; iter < sizeOfPiano; iter++) {
@@ -77,6 +103,9 @@ void Sound::increasePitch() {
     }
 }
 
+/**
+ * Function to decrease Pitch
+ */
 void Sound::decreasePitch() {
     pianoPitch-=0.2;
     for(int iter = 0; iter < sizeOfPiano; iter++) {
@@ -87,6 +116,10 @@ void Sound::decreasePitch() {
     }
 }
 
+/**
+ * Stops/Starts looping note
+ * @param soundIndex - button pressed, according to sound index in Keyboard.cpp
+ */
 void Sound::loopSwitch(int soundIndex) {
     pianoSound[soundIndex].setLoop(!pianoSound[soundIndex].getLoop());
 }

@@ -8,13 +8,13 @@
 /**
  * Basic constructor
  */
-Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Window") {
+Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1080), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
 
     //loads jpg image from computer
     backgroundTexture.loadFromFile("../assets/textures/beigeBackground.jpg");
     backgroundImage.setTexture(&backgroundTexture);
-    backgroundImage.setSize(sf::Vector2f(2400,1600));
+    backgroundImage.setSize(sf::Vector2f(1920,1080));
 
     //loads in gradient for white and black key textures (change filepath as needed)
     whiteKeyTexture.loadFromFile("../assets/textures/beigeToWhite.jpg");
@@ -33,8 +33,8 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     //WHITE KEYS INITIALIZED BELOW
 
     // START OF PIANO INDEX SYMBOLS INITIALIZATION (lowercase letters, numbers)
-    float xPositionSymbolsWhite = 20;
-    float yPositionSymbolsWhite = 1000;
+    float xPositionSymbolsWhite = 15;
+    float yPositionSymbolsWhite = 950;
 
     std::ifstream pianoIndexSymbolsLower("../assets/textFiles/pianoIndexLetters_WhiteKeys.txt");
     if(pianoIndexSymbolsLower.is_open())
@@ -44,7 +44,7 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
         while(std::getline(pianoIndexSymbolsLower,indexSymbolsLower))
         {
             keyboardCharacters[currentIter].setFont(pianoIndexFont);
-            keyboardCharacters[currentIter].setCharacterSize(40);
+            keyboardCharacters[currentIter].setCharacterSize(30);
             keyboardCharacters[currentIter].setFillColor(sf::Color::Black);
             keyboardCharacters[currentIter].setOutlineColor(sf::Color::White);
             keyboardCharacters[currentIter].setOutlineThickness(2);
@@ -52,7 +52,7 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
             keyboardCharacters[currentIter].setPosition(sf::Vector2f(xPositionSymbolsWhite,yPositionSymbolsWhite));
 
             currentIter++;
-            xPositionSymbolsWhite += 66.6;
+            xPositionSymbolsWhite += 53.28;
         }
     }
     else
@@ -62,7 +62,7 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     pianoIndexSymbolsLower.close();
 
     // START OF PIANO INDEX SYMBOLS INITIALIZATION (special characters, uppercase letters)
-    float xPositionSymbolsBlack = 53;
+    float xPositionSymbolsBlack = 44;
     float yPositionSymbolsBlack = 800;
     std::ifstream pianoIndexSymbolsUpper("../assets/textFiles/pianoIndexLetters_BlackKeys.txt");
     if(pianoIndexSymbolsUpper.is_open())
@@ -73,10 +73,10 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
         {
             if(xPositionSkip.find(currentIter) != xPositionSkip.end())
             {
-                xPositionSymbolsBlack += 66.6;
+                xPositionSymbolsBlack += 53.28;
             }
             keyboardCharacters[currentIter].setFont(pianoIndexFont);
-            keyboardCharacters[currentIter].setCharacterSize(30);
+            keyboardCharacters[currentIter].setCharacterSize(20);
             keyboardCharacters[currentIter].setFillColor(sf::Color::Black);
             keyboardCharacters[currentIter].setOutlineColor(sf::Color::White);
             keyboardCharacters[currentIter].setOutlineThickness(2);
@@ -84,7 +84,7 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
             keyboardCharacters[currentIter].setPosition(sf::Vector2f(xPositionSymbolsBlack,yPositionSymbolsBlack));
 
             currentIter++;
-            xPositionSymbolsBlack += 66.6;
+            xPositionSymbolsBlack += 53.28;
         }
 
     }
@@ -100,29 +100,29 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
     for(int iter = 0; iter < 36; iter++)
     {
         keyboardNotes[iter].setPosition(xPositionWhiteKeys,yPositionWhiteKeys);
-        keyboardNotes[iter].setSize(sf::Vector2f(66.6,400));
+        keyboardNotes[iter].setSize(sf::Vector2f(53.28,320));
         keyboardNotes[iter].setOutlineThickness(2);
         keyboardNotes[iter].setOutlineColor(sf::Color::Black);
         keyboardNotes[iter].setTexture(&whiteKeyTexture);
-        xPositionWhiteKeys += 66.6;
+        xPositionWhiteKeys += 53.28;
     }
 
     //BLACK KEYS INITIALIZED BELOW
-    float xPositionBlackKeys = 45.3;
+    float xPositionBlackKeys = 37;
     float yPositionBlackKeys = 700;
     for(int iterator = 36; iterator < 61; iterator++)
     {
         if(xPositionSkip.find(iterator) != xPositionSkip.end())
         {
-            xPositionBlackKeys += 66.6;
+            xPositionBlackKeys += 53.28;
         }
         keyboardNotes[iterator].setPosition(xPositionBlackKeys,yPositionBlackKeys);
-        keyboardNotes[iterator].setSize(sf::Vector2f(40,200));
+        keyboardNotes[iterator].setSize(sf::Vector2f(32,160));
         keyboardNotes[iterator].setFillColor(sf::Color::Black);
         keyboardNotes[iterator].setOutlineThickness(2);
         keyboardNotes[iterator].setOutlineColor(sf::Color::Black);
         keyboardNotes[iterator].setTexture(&blackKeyTexture);
-        xPositionBlackKeys += 66.6;
+        xPositionBlackKeys += 53.28;
     }
 }
 

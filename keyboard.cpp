@@ -5,20 +5,19 @@
 #include <iostream>
 #include <unordered_map>
 
-/**
- * Basic constructor
- */
+// Constructor definition
 Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1080), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
 
     //loads jpg image from computer
-    backgroundTexture.loadFromFile("../assets/textures/beigeBackground.jpg");
+    backgroundTexture.loadFromFile("../assets/textures/goatedBackground.jpg");
     backgroundImage.setTexture(&backgroundTexture);
     backgroundImage.setSize(sf::Vector2f(1920,1080));
 
     //loads in gradient for white and black key textures (change filepath as needed)
     whiteKeyTexture.loadFromFile("../assets/textures/beigeToWhite.jpg");
     whiteKeyTextureDark.loadFromFile("../assets/textures/beigeToWhite_Dark.jpg");
+
     blackKeyTexture.loadFromFile("../assets/textures/blackGradient.jpg");
     blackKeyTextureLight.loadFromFile("../assets/textures/blackTextureLight.jpg");
 
@@ -126,13 +125,13 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1080), "Keyboard Windo
     }
 }
 
-/*
+
 void Keyboard::keyboardEvent(char presetOption)
 {
     std::cout << presetOption << "reset Option" << std::endl;
-    sf::Event events;
+    sf::Event events{};
 
-    std::ifstream presetNotes("C:/Users/bauti/KeyboardProjectFiles/firstFourMeasuresOfOp10_1.txt");
+    std::ifstream presetNotes("../assets/textFiles/presetMusicNotes.txt");
 
     if(!presetNotes.is_open())
     {
@@ -159,13 +158,13 @@ void Keyboard::keyboardEvent(char presetOption)
                 //suppose a white key was pressed, change white key texture
                 if(soundIndex <= 35)
                 {
-                    pianoSound[soundIndex].play();
+                    piano.playSound(soundIndex);
                     keyboardNotes[soundIndex].setTexture(&whiteKeyTextureDark);
                 }
                     //suppose a black key was pressed, change black key texture
                 else
                 {
-                    pianoSound[soundIndex].play();
+                    piano.playSound(soundIndex);
                     keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight);
                 }
                 sf::sleep(sf::milliseconds(100));
@@ -173,15 +172,11 @@ void Keyboard::keyboardEvent(char presetOption)
         }
     }
 }
-*/
+
 
 // for default simulator event
 // void Keyboard::keyboardEvent(int)
-
-/** Everything to do with the keys, from texture changes,
- *  playing sounds, and detecting mouse presses in response to input
- */
-void Keyboard::keyboardEvent()
+void Keyboard::keyboardEvent(int defaultOption)
 { //test for events
     sf::Event events{};
     while (keyboardWindow.pollEvent(events)) {
@@ -249,11 +244,6 @@ void Keyboard::keyboardEvent()
     }
 }
 
-/** detects ASCII characters entered
- *
- * @param unicodeDetect we pass the unicode to this function
- * @return return numerical value of button pressed
- */
 int Keyboard::charDetectASCII(int unicodeDetect)
 {
     std::unordered_map<int, int> unicodeIndexMap =
@@ -288,10 +278,7 @@ int Keyboard::charDetectASCII(int unicodeDetect)
         return -1;
 }
 
-/** Draws the keyboard, each key, etc.
- *
- */
-void Keyboard::drawKeyboard()
+void Keyboard::drawKeyboard() 
 {
     keyboardWindow.draw(backgroundImage);
     for(int iterate = 0; iterate < 61; iterate++)
@@ -304,29 +291,16 @@ void Keyboard::drawKeyboard()
     }
 }
 
-/** Renders the window
- *
- */
 void Keyboard::renderWindow() {
     keyboardWindow.clear();
     drawKeyboard();
     keyboardWindow.display();
 }
 
-/** Runs the keyboard
- *
- */
-void Keyboard::runKeyboard()
+void Keyboard::runKeyboard() 
 {
-    while (keyboardWindow.isOpen()) 
-    {
-        keyboardEvent();  // Handles events (keyboard, mouse)
-        renderWindow();   // clear and draw
-    }
-
     //POTENTIAL POLYMORPHIC PROGRAM TOO HANDLE DIFFERENT PIANO SIMULATION OPTIONS
-    /*
-        int userDecision;
+    int userDecision;
     char presetDecision = 'P';
     int defaultDecision = 1;
 
@@ -351,7 +325,6 @@ void Keyboard::runKeyboard()
 
         }
     }
-    */
 }
 // SFML has internal events, which are stored somewhere. The object named events we created stores the events that come from the pollEvent function,
 // which continuously checks for events in order. Now, the object events of type sf::Event contains data that we can compare to our existing items,
@@ -363,52 +336,3 @@ void Keyboard::runKeyboard()
 // if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && events.key.code == sf::Keyboard::B) {
 //     pianoSound[events.key.code].play();
 // }
-
-/*
-void Keyboard::keyboardEvent(char presetOption)
-{
-    std::cout << presetOption << "reset Option" << std::endl;
-    sf::Event events;
-
-    std::ifstream presetNotes("C:/Users/bauti/KeyboardProjectFiles/firstFourMeasuresOfOp10_1.txt");
-
-    if(!presetNotes.is_open())
-    {
-        std::cerr << "Unable to open preset music file." << std::endl;
-    }
-
-    while(keyboardWindow.pollEvent(events))
-    {
-
-        sf::Uint32 unicodeConvert;
-        char currentChar;
-
-        if(sf::Event::KeyPressed)
-        {
-            while(presetNotes.get(currentChar))
-            {
-                unicodeConvert = static_cast<sf::Uint32>(currentChar);
-
-                int soundIndex = charDetectASCII(unicodeConvert);
-
-                //accounts for gaps in the ASCII range, where there are no corresponding keyboard inputs for the piano simulator
-                if (soundIndex == -1) { break; }
-
-                //suppose a white key was pressed, change white key texture
-                if(soundIndex <= 35)
-                {
-                    pianoSound[soundIndex].play();
-                    keyboardNotes[soundIndex].setTexture(&whiteKeyTextureDark);
-                }
-                    //suppose a black key was pressed, change black key texture
-                else
-                {
-                    pianoSound[soundIndex].play();
-                    keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight);
-                }
-                sf::sleep(sf::milliseconds(100));
-            }
-        }
-    }
-}
-*/

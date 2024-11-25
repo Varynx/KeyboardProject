@@ -8,6 +8,7 @@
 class Keyboard {
 private:
     sf::RenderWindow keyboardWindow;
+    // Sound *piano = new
     Sound piano;
 
     sf::RectangleShape backgroundImage;
@@ -26,10 +27,11 @@ public:
     Keyboard();
 
     //potential differing events for default/preset piano simulator options
-    //void keyboardEvent(char presetMode);
-    //void keyboardEvent(int defaultMode);
-    // Events
-    void keyboardEvent();
+    void keyboardEvent(char presetMode);
+    void keyboardEvent(int defaultMode);
+    // // Events
+    // void keyboardEvent();
+    // void keyboardEvent(char presetOption);
 
     // Draws each piano note
     void drawKeyboard();

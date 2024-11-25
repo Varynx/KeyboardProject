@@ -8,9 +8,9 @@
 class Keyboard {
 private:
     sf::RenderWindow keyboardWindow;
-    // Sound *piano = new
     Sound piano;
 
+    //Declares all arrays, shapes, fonts, and textures to be drawn
     sf::RectangleShape backgroundImage;
     sf::Texture backgroundTexture;
 
@@ -26,12 +26,10 @@ public:
     // Constructor
     Keyboard();
 
-    //potential differing events for default/preset piano simulator options
+    //METHODS
     void keyboardEvent(char presetMode);
+
     void keyboardEvent(int defaultMode);
-    // // Events
-    // void keyboardEvent();
-    // void keyboardEvent(char presetOption);
 
     // Draws each piano note
     void drawKeyboard();

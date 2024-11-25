@@ -41,10 +41,10 @@ void Sound::soundFunctions() {
  * @param events - detects events for mouse click
  * @param keyboardNotes - Get relative position of the physical note shapes, like their boundaries
  */
-void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboardNotes) {
+void Sound::playSound(sf::Event events, std::array<sf::RectangleShape,61> keyboardNotes) {//play sound with mouse/touch
     for(int iterNotes = 0; iterNotes < 36; iterNotes++) {
         if( ( events.mouseButton.x >=keyboardNotes[iterNotes].getPosition().x && events.mouseButton.x <= (keyboardNotes[iterNotes].getPosition().x)+53.28 )
-        && (events.mouseButton.y >= 900 && events.mouseButton.y <= 1020)){
+        && (events.mouseButton.y >= 860 && events.mouseButton.y <= 1020)){
             pianoSound[iterNotes].play();
         }
     }

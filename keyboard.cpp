@@ -349,10 +349,3 @@ void Keyboard::runKeyboard()
 // SFML has internal events, which are stored somewhere. The object named events we created stores the events that come from the pollEvent function,
 // which continuously checks for events in order. Now, the object events of type sf::Event contains data that we can compare to our existing items,
 // such as Close, Escape, or KeyboardPressed
-
-//CODE DUMP
-// if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && events.key.code) {
-
-// if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && events.key.code == sf::Keyboard::B) {
-//     pianoSound[events.key.code].play();
-// }

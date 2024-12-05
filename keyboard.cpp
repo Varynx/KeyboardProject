@@ -119,7 +119,6 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Windo
         }
         keyboardNotes[iterator].setPosition(xPositionBlackKeys,yPositionBlackKeys);
         keyboardNotes[iterator].setSize(sf::Vector2f(32,160));
-        keyboardNotes[iterator].setFillColor(sf::Color::Black);
         keyboardNotes[iterator].setOutlineThickness(2);
         keyboardNotes[iterator].setOutlineColor(sf::Color::Black);
         keyboardNotes[iterator].setTexture(&blackKeyTexture);

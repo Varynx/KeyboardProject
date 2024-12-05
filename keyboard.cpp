@@ -8,13 +8,13 @@
 /**
  * Basic constructor
  */
-Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1080), "Keyboard Window") {
+Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1200), "Keyboard Window") {
     keyboardWindow.setFramerateLimit(60);
 
     //loads jpg image from computer
     backgroundTexture.loadFromFile("../assets/textures/beigeBackground.jpg");
     backgroundImage.setTexture(&backgroundTexture);
-    backgroundImage.setSize(sf::Vector2f(1920,1080));
+    backgroundImage.setSize(sf::Vector2f(1920,1200));
 
     //loads in gradient for white and black key textures (change filepath as needed)
     whiteKeyTexture.loadFromFile("../assets/textures/beigeToWhite.jpg");
@@ -126,8 +126,11 @@ Keyboard::Keyboard() : keyboardWindow(sf::VideoMode(1920, 1080), "Keyboard Windo
         xPositionBlackKeys += 53.28;
     }
 }
-
-
+/////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Plays a preset song in which you only have to hold down a key.
+ * @param presetOption - used to select if we picked the preset option or not
+ */
 void Keyboard::keyboardEvent(char presetOption)
 {
     std::cout << presetOption << "reset Option" << std::endl;
@@ -145,8 +148,11 @@ void Keyboard::keyboardEvent(char presetOption)
 
         sf::Uint32 unicodeConvert;
         char currentChar;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+            keyboardWindow.close();
+        }
 
-        if(sf::Event::KeyPressed)
+        if(events.type == sf::Event::KeyPressed)
         {
             while(presetNotes.get(currentChar))
             {
@@ -169,7 +175,7 @@ void Keyboard::keyboardEvent(char presetOption)
                     piano.playSound(soundIndex);
                     keyboardNotes[soundIndex].setTexture(&blackKeyTextureLight);
                 }
-                sf::sleep(sf::milliseconds(100));
+                sf::sleep(sf::milliseconds(250));
             }
         }
     }
@@ -200,6 +206,9 @@ void Keyboard::keyboardEvent(int defaultOption)
             case sf::Event::KeyPressed:
                 if(events.key.code == sf::Keyboard::Escape) {
                     keyboardWindow.close();
+                }
+                if(events.key.code == sf::Keyboard::Slash) {
+                    std::cout<<keyboardNotes[5].getSize().x<<std::endl;
                 }
                 piano.soundFunctions();//volume,pitch
             break;

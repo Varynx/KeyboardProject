@@ -3,9 +3,23 @@
 #include <iostream>
 
 /**
+ * SoundBase constructor to initialize volume and pitch
+ */
+SoundBase::SoundBase() : soundVolume(100), soundPitch(1.0f) {}
+//Defined virtual functions
+void SoundBase::increaseVolume() {}
+
+void SoundBase::decreaseVolume() {}
+
+void SoundBase::increasePitch() {}
+
+void SoundBase::decreasePitch() {}
+
+/**
  * Basic constructor
  */
 Sound::Sound() {
+
     for (int pianoIter = 0; pianoIter < sizeOfPiano; pianoIter++)
     {
         std::string name = "../assets/sounds/note" + std::to_string(pianoIter) + ".mp3";
@@ -15,7 +29,6 @@ Sound::Sound() {
         }
         pianoSound[pianoIter].setBuffer(pianoBuffer[pianoIter]);
     }
-
 }
 
 /**
@@ -68,12 +81,12 @@ void Sound::playSound(int soundIndex) {
  * Function to increase volume
  */
 void Sound::increaseVolume() {
-    pianoVolume++;
+    soundVolume++;
     for(int iter = 0; iter < sizeOfPiano; iter++) {
-        if(pianoVolume > 100) {
-            pianoVolume = 100;
+        if(soundVolume > 100) {
+            soundVolume = 100;
         }
-        pianoSound[iter].setVolume(pianoVolume);
+        pianoSound[iter].setVolume(soundVolume);
     }
 }
 
@@ -81,12 +94,12 @@ void Sound::increaseVolume() {
  * Function to decrease volume
  */
 void Sound::decreaseVolume() {
-    pianoVolume--;
+    soundVolume--;
     for(int iter = 0; iter < sizeOfPiano; iter++) {
-        if(pianoVolume < 0) {
-            pianoVolume = 0;
+        if(soundVolume < 0) {
+            soundVolume = 0;
         }
-        pianoSound[iter].setVolume(pianoVolume);
+        pianoSound[iter].setVolume(soundVolume);
     }
 }
 
@@ -94,12 +107,12 @@ void Sound::decreaseVolume() {
  * Function to increase Pitch
  */
 void Sound::increasePitch() {
-    pianoPitch+=0.2;
+    soundPitch+=0.2;
     for(int iter = 0; iter < sizeOfPiano; iter++) {
-        if(pianoPitch > 4) {
-            pianoPitch = 4;
+        if(soundPitch > 4) {
+            soundPitch = 4;
         }
-        pianoSound[iter].setPitch(pianoPitch);
+        pianoSound[iter].setPitch(soundPitch);
     }
 }
 
@@ -107,12 +120,12 @@ void Sound::increasePitch() {
  * Function to decrease Pitch
  */
 void Sound::decreasePitch() {
-    pianoPitch-=0.2;
+    soundPitch-=0.2;
     for(int iter = 0; iter < sizeOfPiano; iter++) {
-        if(pianoPitch < 0.2) {
-            pianoPitch = 0.2;
+        if(soundPitch < 0.2) {
+            soundPitch = 0.2;
         }
-        pianoSound[iter].setPitch(pianoPitch);
+        pianoSound[iter].setPitch(soundPitch);
     }
 }
 

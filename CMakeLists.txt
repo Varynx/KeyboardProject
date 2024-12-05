@@ -10,7 +10,7 @@ add_executable(KeyboardProject main.cpp
         Sound.h
 )
 
-set(CMAKE_PREFIX_PATH SFML "C:/Programming-Gustavo/vcpkg/installed/x64-mingw-dynamic/share/sfml")
+set(CMAKE_PREFIX_PATH SFML "C:/ProgrammingGV/vcpkg/installed/x64-mingw-dynamic/share/sfml")
 find_package(SFML COMPONENTS #[[system]] audio graphics window CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
 #[[find_package(GLU REQUIRED)]]

@@ -1,4 +1,4 @@
-Keyboard Simulator with OpenSSF scorebard
+Keyboard Simulator with OpenSSF scoreboard
 
 Piano
 {

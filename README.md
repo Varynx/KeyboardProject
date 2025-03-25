@@ -9,4 +9,4 @@ INPUTS
   Holding ` and one of the buttons: will loop that note the next time its pressed
 }
 
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/'Bau-t'/'KeyboardSimulator'/badge)](https://scorecard.dev/viewer/?uri=github.com/'Bau-t'/'KeyboardSimulator')
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Bau-t/KeyboardSimulator/badge)](https://scorecard.dev/viewer/?uri=github.com/Bau-t/KeyboardSimulator)

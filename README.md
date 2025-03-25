@@ -1,4 +1,4 @@
-Keyboard Simulator with OpenSSF scoreboard
+Keyboard Simulator with OpenSSF scoreboard - Edwin Bautista
 
 Piano
 {

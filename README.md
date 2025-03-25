@@ -10,3 +10,5 @@ INPUTS
 }
 
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Bau-t/KeyboardSimulator/badge)](https://scorecard.dev/viewer/?uri=github.com/Bau-t/KeyboardSimulator)
+
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/10319/badge)](https://www.bestpractices.dev/projects/10319)

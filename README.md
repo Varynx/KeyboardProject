@@ -6,10 +6,14 @@
 
 **Overview**
 
-Piano
-{
-INPUTS
-  Pressing letters, numbers, mouse, or touching the screen: play notes according to what is one screen
-  Pressing characters -, =, [, ] : decrease volume, increase volume, decrease pitch, increase pitch
-  Holding ` and one of the buttons: will loop that note the next time its pressed
-}
+Inputs:
+Pressing letters, numbers, the mouse, or touching the screen will play corresponding piano notes displayed on the screen.
+
+Pressing the characters -, =, [, ]
+
+  - and = decrease or increase the volume.
+
+  [ and ] decrease or increase the pitch.
+
+Holding the backtick/tilde ` and pressing a key will loop that note the next time it is pressed.
+

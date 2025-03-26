@@ -9,7 +9,7 @@
 Inputs:
 Pressing letters, numbers, the mouse, or touching the screen will play corresponding piano notes displayed on the screen.
 
-Pressing the characters -, =, [, ]
+Pressing the characters -, =, [ , ]
 
   \- and = decrease or increase the volume.
 

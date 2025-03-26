@@ -11,7 +11,7 @@ Pressing letters, numbers, the mouse, or touching the screen will play correspon
 
 Pressing the characters -, =, [, ]
 
-  - and = decrease or increase the volume.
+  \- and = decrease or increase the volume.
 
   [ and ] decrease or increase the pitch.
 

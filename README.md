@@ -1,5 +1,8 @@
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Varynx/KeyboardProject/badge)](https://scorecard.dev/viewer/?uri=github.com/Varynx/KeyboardProject)
 
+Keyboard Simulator Project: A project to simulate a piano through C++ with SFML.
+
+Overview
 Piano
 {
 INPUTS

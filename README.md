@@ -19,3 +19,7 @@ Pressing the characters -, =, [ , ]
 
 Holding the backtick/tilde ` and pressing a key will loop that note the next time it is pressed.
 
+
+**Issues**
+
+Can be reported by the issues tab

@@ -1,3 +1,0 @@
-C:/ProgrammingGV/COP 3003/KeyboardProject/cmake-build-debug/CMakeFiles/KeyboardProject.dir
-C:/ProgrammingGV/COP 3003/KeyboardProject/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/ProgrammingGV/COP 3003/KeyboardProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
